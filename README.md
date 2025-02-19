@@ -2,7 +2,7 @@
 
 This Python script allows users to input a Dota 2 match ID to fetch and visualize player statistics. Key features include:
 - Fetching match data from the OpenDota API.
-- Displaying KDA (Kills, Deaths, Assists) statistics for the first 10 players of a match.
+- Displaying KDA (Kills, Deaths, Assists) statistics for the all players of a match.
 - User-friendly GUI built with Tkinter for easy match ID input.
 - Interactive matplotlib plots showing individual player performance.
 
