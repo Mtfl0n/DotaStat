@@ -3,6 +3,7 @@ import requests
 import matplotlib.pyplot as plt
 from tkinter import Tk, Entry, Button, Label
 
+# Загружаем имена героев
 with open('hero_ids.json', 'r') as file:
     hero_names_data = json.load(file)
 hero_names_dict = {hero['id']: hero['name'] for hero in hero_names_data['result']['heroes']}
@@ -22,9 +23,55 @@ def fetch_match_data():
         status_label.config(text=f"Error: {match_data['error']}")
         return
 
-    # Create and show the plot
     create_kda_plot(match_data)
     status_label.config(text="Match statistics displayed.")
+
+
+def fetch_player_win_lose_data():
+    account_id = entry.get()
+    if not account_id.isdigit():
+        status_label.config(text="Please enter a valid player ID")
+        return
+
+    # Запрос для win/lose
+    url_wl = f"https://api.opendota.com/api/players/{account_id}/wl"
+    response_wl = requests.get(url_wl)
+    win_lose_data = response_wl.json()
+    if 'error' in win_lose_data:
+        status_label.config(text=f"Error: {win_lose_data['error']}")
+        return
+
+    # Запрос для имени игрока
+    url_player = f"https://api.opendota.com/api/players/{account_id}"
+    response_player = requests.get(url_player)
+    player_data = response_player.json()
+    if 'error' in player_data:
+        status_label.config(text=f"Error: {player_data['error']}")
+        return
+
+    # Получаем имя игрока
+    player_name = player_data.get('profile', {}).get('personaname', 'Unknown')
+
+    create_win_lose_bar(win_lose_data, player_name)
+    status_label.config(text="Win/Lose stats displayed.")
+
+
+def create_win_lose_bar(win_lose_data, player_name):
+    wins = win_lose_data.get('win', 0)
+    losses = win_lose_data.get('lose', 0)
+
+    categories = ['Wins', 'Losses']
+    values = [wins, losses]
+    colors = ['green', 'red']
+
+    plt.figure(figsize=(6, 4))
+    plt.bar(categories, values, color=colors)
+
+    plt.title(f"Player Win/Loss Record: {player_name}")
+    plt.ylabel("Count")
+    for i, value in enumerate(values):
+        plt.text(i, value + 0.5, str(value), ha='center')
+    plt.show()
 
 
 def create_kda_plot(match_data):
@@ -33,7 +80,7 @@ def create_kda_plot(match_data):
 
     fig, axes = plt.subplots(5, 2, figsize=(20, 30))
     fig.suptitle('KDA for First 10 Players', fontsize=16)
-    axes = axes.ravel()  # Flatten the axes array for easier indexing
+    axes = axes.ravel()
 
     for i, player in enumerate(match_data.get('players', [])[:10]):
         hero_id = player.get('hero_id')
@@ -57,6 +104,7 @@ def create_kda_plot(match_data):
     plt.show()
 
 
+# GUI
 root = Tk()
 root.title("Match Statistics Viewer")
 
@@ -73,12 +121,13 @@ def paste(event):
 
 entry.bind("<Button-3>", paste)
 
-Button(root, text="Get Stats", command=fetch_match_data).pack()
+Button(root, text="Get Match Stats", command=fetch_match_data).pack()
+Button(root, text="Get Player Win/Lose", command=fetch_player_win_lose_data).pack()
 
 status_label = Label(root, text="")
 status_label.pack()
 
-instructions = Label(root, text="Right-click to paste match ID")
+instructions = Label(root, text="Right-click to paste match or player ID")
 instructions.pack()
 
 root.mainloop()
