@@ -1,9 +1,24 @@
-**Dota 2 Match Statistics Viewer**
+DotaStat — Анализ статистики Dota 2
+DotaStat — это мощный и удобный инструмент для анализа статистики матчей и игроков в Dota 2, построенный на основе OpenDota API. Программа помогает фанатам и аналитикам глубже погрузиться в игру, визуализируя ключевые метрики через красивые графики и предоставляя интуитивный интерфейс.
 
-This Python script allows users to input a Dota 2 match ID to fetch and visualize player statistics. Key features include:
-- Fetching match data from the OpenDota API.
-- Displaying KDA (Kills, Deaths, Assists) statistics for the all players of a match.
-- User-friendly GUI built with Tkinter for easy match ID input.
-- Interactive matplotlib plots showing individual player performance.
+Основные возможности
+Статистика матчей:
+Кто победил (Radiant/Dire) и длительность матча.
+Графики GPM (золото в минуту) и XPM (опыт в минуту) для первых 10 игроков.
+Подробный KDA (убийства/смерти/помощь) в виде круговых диаграмм для каждого игрока.
+Винрейт героев в профессиональных играх на основе общей статистики.
+Статистика игроков:
+Общий винрейт (победы/поражения) в виде столбчатого графика.
+История последних матчей: график результатов (win/lose) и динамика KDA с расчётом среднего значения.
+Технические фичи:
+Кэширование API-запросов для быстрой работы и снижения нагрузки на сервер.
+Простой GUI на Tkinter с поддержкой вставки ID через правый клик.
+Поддержка актуальных данных через OpenDota API.
 
-Use this tool to quickly analyze match outcomes without needing to navigate through complex data structures. Requires Python with requests, matplotlib, and json modules installed.
+Matplotlib: визуализация данных через графики.
+Requests: работа с API.
+Tkinter: графический интерфейс.
+Git: контроль версий.
+
+Хотите узнать, как сыграл ваш любимый герой в матче? Введите ID матча, нажмите "Get Match Stats" и смотрите винрейт и KDA.
+Интересно, в форме ли ваш друг? Введите его ID, кликните "Get Player Recent Matches" и анализируйте последние игры.
