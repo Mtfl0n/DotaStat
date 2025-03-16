@@ -1,20 +1,5 @@
-DotaStat — Анализ статистики Dota 2
+DotaStat — Dota 2 Statistics Analysis
 
+Key Features Match statistics: Who won (Radiant/Dire) and match duration. GPM (gold per minute) and XPM (experience per minute) charts for the top 10 players. Detailed KDA (kills/deaths/assists) in the form of pie charts for each player. Hero winrate in professional games based on overall statistics. Player statistics: Overall winrate (wins/losses) in the form of a bar graph. Recent match history: results graph (win/lose) and KDA dynamics with calculation of the average value. Technical features: API request caching for fast work and reduced server load. Simple Tkinter GUI with support for inserting IDs via right click. Support for up-to-date data via OpenDota API.
 
-Основные возможности
-Статистика матчей:
-Кто победил (Radiant/Dire) и длительность матча.
-Графики GPM (золото в минуту) и XPM (опыт в минуту) для первых 10 игроков.
-Подробный KDA (убийства/смерти/помощь) в виде круговых диаграмм для каждого игрока.
-Винрейт героев в профессиональных играх на основе общей статистики.
-Статистика игроков:
-Общий винрейт (победы/поражения) в виде столбчатого графика.
-История последних матчей: график результатов (win/lose) и динамика KDA с расчётом среднего значения.
-Технические фичи:
-Кэширование API-запросов для быстрой работы и снижения нагрузки на сервер.
-Простой GUI на Tkinter с поддержкой вставки ID через правый клик.
-Поддержка актуальных данных через OpenDota API.
-
-Matplotlib: визуализация данных через графики.
-Requests: работа с API.
-Tkinter: графический интерфейс.
+Matplotlib: data visualization via graphs. Requests: working with API. Tkinter: graphical interface
